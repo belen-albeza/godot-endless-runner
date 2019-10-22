@@ -6,3 +6,6 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
+
+# OS specific ignores
+.DS_Store
