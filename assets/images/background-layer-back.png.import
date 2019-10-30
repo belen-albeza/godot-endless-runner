@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ground.png-a10a452afa2dab242aacf15617dc4109.stex"
+path="res://.import/background-layer-back.png-b2d7e0afb823fd228912a01705bfec23.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ground.png"
-dest_files=[ "res://.import/ground.png-a10a452afa2dab242aacf15617dc4109.stex" ]
+source_file="res://assets/images/background-layer-back.png"
+dest_files=[ "res://.import/background-layer-back.png-b2d7e0afb823fd228912a01705bfec23.stex" ]
 
 [params]
 
@@ -24,11 +24,11 @@ flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
