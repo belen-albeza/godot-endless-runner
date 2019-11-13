@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Stage.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/background-layer-back.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/background-layer-front.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/ground.png" type="Texture" id=4]
 [ext_resource path="res://prefabs/Character.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/Obstacle.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+SCROLL_SPEED = 250
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true
@@ -44,3 +46,11 @@ position = Vector2( 100, 275 )
 offset = Vector2( -100, -275 )
 anchor_mode = 0
 current = true
+limit_top = 0
+limit_smoothed = true
+
+[node name="Obstacle" parent="." instance=ExtResource( 6 )]
+position = Vector2( 308.708, 283 )
+
+[node name="Obstacle2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1066.96, 283 )
