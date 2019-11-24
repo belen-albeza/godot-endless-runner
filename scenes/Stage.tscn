@@ -45,6 +45,8 @@ offset = Vector2( 0, -64 )
 [node name="Character" parent="." instance=ExtResource( 6 )]
 editor/display_folded = true
 position = Vector2( 100, 273 )
+JUMP_SPEED = 400
+GRAVITY = 800
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 offset = Vector2( -100, -275 )

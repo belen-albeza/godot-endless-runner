@@ -13,7 +13,7 @@ var screen_width = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ground_y = $Character.position.y + $Character.getHeight()/2
+	ground_y = $Character.position.y + $Character.get_height()/2
 	screen_width = get_viewport_rect().size.x
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

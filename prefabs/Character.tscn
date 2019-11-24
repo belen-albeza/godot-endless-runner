@@ -29,6 +29,7 @@ animations = [ {
 input_pickable = false
 collision_mask = 6
 script = ExtResource( 1 )
+DEATH_ANIM_LENGTH = 0.125
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -47,4 +48,8 @@ animation = "walk"
 frame = 2
 
 [node name="DeathTween" type="Tween" parent="."]
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="." to="." method="_on_Character_area_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
