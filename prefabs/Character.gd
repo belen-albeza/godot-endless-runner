@@ -23,6 +23,7 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("chara_jump") and can_jump:
 		speed_y = -JUMP_SPEED
+		$AudioJumpSfx.play()
 
 	# update vertical position and speed
 	speed_y += GRAVITY * delta
