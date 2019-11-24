@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chara-walk.png-0fb722955144ed0af5ed835b3db9df53.stex"
+path="res://.import/chara-walk-04.png-9d404c4ba4dcb457de6253445193c0ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/chara-walk.png"
-dest_files=[ "res://.import/chara-walk.png-0fb722955144ed0af5ed835b3db9df53.stex" ]
+source_file="res://assets/images/chara-walk-04.png"
+dest_files=[ "res://.import/chara-walk-04.png-9d404c4ba4dcb457de6253445193c0ea.stex" ]
 
 [params]
 

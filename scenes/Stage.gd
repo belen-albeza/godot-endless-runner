@@ -1,14 +1,20 @@
 extends Node2D
 
 export (int) var SCROLL_SPEED = 100
+export (PackedScene) var ObstacleScene = null
+export (int) var SPAWN_PROBABILITY = 85
+export (int) var SPAWN_OFFSET_X = 100
 
 # Declare member variables here. Examples:
 var level_x = 0
 var is_game_over = false
+var ground_y = 0
+var screen_width = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	ground_y = $Character.position.y + $Character.getHeight()/2
+	screen_width = get_viewport_rect().size.x
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -21,3 +27,13 @@ func _on_Character_died():
 
 func _on_Character_death_started():
 	is_game_over = true
+
+func _on_ObstacleSpawnTimer_timeout():
+	if rand_range(0, 100) < SPAWN_PROBABILITY:
+		self._spawn_obstacle()
+
+func _spawn_obstacle():
+	var obstacle = ObstacleScene.instance()
+	obstacle.position.y = ground_y
+	obstacle.position.x = level_x + screen_width + rand_range(0, SPAWN_OFFSET_X)
+	$Obstacles.add_child(obstacle)

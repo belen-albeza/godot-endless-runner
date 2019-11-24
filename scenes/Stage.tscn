@@ -1,15 +1,16 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Stage.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/background-layer-back.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/background-layer-front.png" type="Texture" id=3]
-[ext_resource path="res://assets/images/ground.png" type="Texture" id=4]
-[ext_resource path="res://prefabs/Character.tscn" type="PackedScene" id=5]
-[ext_resource path="res://prefabs/Obstacle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefabs/Obstacle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/images/background-layer-back.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/background-layer-front.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/ground.png" type="Texture" id=5]
+[ext_resource path="res://prefabs/Character.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 SCROLL_SPEED = 250
+ObstacleScene = ExtResource( 2 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true
@@ -19,7 +20,7 @@ motion_scale = Vector2( 0.15, 1 )
 motion_mirroring = Vector2( 1280, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/LayerBack"]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 centered = false
 
 [node name="LayerMiddle" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -27,7 +28,7 @@ motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 960, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/LayerMiddle"]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 centered = false
 
 [node name="LayerFront" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -35,12 +36,15 @@ motion_mirroring = Vector2( 960, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/LayerFront"]
 position = Vector2( 0, 360 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 centered = false
 offset = Vector2( 0, -64 )
 
-[node name="Character" parent="." instance=ExtResource( 5 )]
-position = Vector2( 100, 275 )
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Character" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
+position = Vector2( 100, 273 )
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 offset = Vector2( -100, -275 )
@@ -49,10 +53,9 @@ current = true
 limit_top = 0
 limit_smoothed = true
 
-[node name="Obstacle" parent="." instance=ExtResource( 6 )]
-position = Vector2( 308.708, 283 )
-
-[node name="Obstacle2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1066.96, 283 )
+[node name="ObstacleSpawnTimer" type="Timer" parent="."]
+wait_time = 1.25
+autostart = true
 [connection signal="death_started" from="Character" to="." method="_on_Character_death_started"]
 [connection signal="died" from="Character" to="." method="_on_Character_died" flags=3]
+[connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_ObstacleSpawnTimer_timeout"]

@@ -16,6 +16,7 @@ var speed_y = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ground_y = position.y
+	$AnimatedSprite.play("walk")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,8 +39,12 @@ func _on_Character_area_entered(area):
 func _die():
 	$AudioHitSfx.play()
 	$AudioHitSfx.connect("finished", self, "_on_AudioHitSfxFinished")
+	$AnimatedSprite.play("dead")
 	emit_signal("death_started")
 
 func _on_AudioHitSfxFinished():
 	$AudioHitSfx.disconnect("finished", self, "_on_AudioHitSfxFinished")
 	emit_signal("died")
+
+func getHeight():
+	return $CollisionShape2D.shape.extents.y * 2
