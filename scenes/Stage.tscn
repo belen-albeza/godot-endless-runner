@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Stage.gd" type="Script" id=1]
 [ext_resource path="res://prefabs/Obstacle.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/images/ground.png" type="Texture" id=5]
 [ext_resource path="res://prefabs/Character.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/fonts/ui-font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/GameOver.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -67,6 +68,11 @@ margin_bottom = 51.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.290196, 0.211765, 0.196078, 1 )
 text = "Score: 0"
+
+[node name="GameOver" parent="." instance=ExtResource( 8 )]
+
+[node name="FadeTween" type="Tween" parent="GameOver"]
 [connection signal="death_started" from="Character" to="." method="_on_Character_death_started"]
 [connection signal="died" from="Character" to="." method="_on_Character_died" flags=3]
 [connection signal="timeout" from="ObstacleSpawnTimer" to="." method="_on_ObstacleSpawnTimer_timeout"]
+[connection signal="finished" from="GameOver" to="." method="_on_GameOver_finished"]

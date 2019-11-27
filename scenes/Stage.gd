@@ -16,8 +16,12 @@ var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# setup the game world
 	ground_y = $Character.position.y + $Character.get_height()/2
 	screen_width = get_viewport_rect().size.x
+
+	# setup ui
+	self._hide_game_over()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,10 +31,11 @@ func _process(delta):
 		self._update_score(floor(level_x * SCORE_DAMPING))
 
 func _on_Character_died():
-	get_tree().reload_current_scene()
+	pass
 
 func _on_Character_death_started():
 	is_game_over = true
+	self._show_game_over()
 
 func _on_ObstacleSpawnTimer_timeout():
 	if rand_range(0, 100) < SPAWN_PROBABILITY:
@@ -45,3 +50,21 @@ func _spawn_obstacle():
 func _update_score(value):
 	score = value
 	$UILayer/ScoreLabel.text = "Score: " + str(value)
+
+func _hide_game_over():
+	$GameOver/RootControl.hide()
+	$GameOver.set_process_input(false)
+
+func _show_game_over():
+	$GameOver/RootControl.modulate = Color(1, 1, 1, 0)
+	$GameOver/FadeTween.interpolate_property(
+		$GameOver/RootControl, "modulate",
+		Color(1, 1, 1, 0), Color(1, 1, 1, 1),
+		0.4, Tween.TRANS_SINE, Tween.EASE_IN)
+	$GameOver/FadeTween.start()
+
+	$GameOver.set_process_input(true)
+	$GameOver/RootControl.show()
+
+func _on_GameOver_finished():
+	get_tree().reload_current_scene()

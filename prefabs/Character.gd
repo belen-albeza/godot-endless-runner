@@ -1,9 +1,5 @@
 extends Area2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 export (int) var JUMP_SPEED = 400
 export (int) var GRAVITY = 800
 export (float) var DEATH_ANIM_LENGTH = 0.25
