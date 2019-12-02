@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Title.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Stage.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/images/background-layer-back.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/background-layer-front.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/ground.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/large-font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/ui-font.tres" type="DynamicFont" id=7]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 180.357 ],
+"_edit_vertical_guides_": [ 480.209 ]
+}
+SCROLL_SPEED = 120
+STAGE_SCENE = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
+
+[node name="BackLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.15, 1 )
+motion_mirroring = Vector2( 1280, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/BackLayer"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="MiddleLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 960, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/MiddleLayer"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="FrontLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 960, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/FrontLayer"]
+position = Vector2( 0, 360 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 0, -64 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -339.0
+margin_top = -119.605
+margin_right = 339.0
+margin_bottom = 6.39456
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.290196, 0.211765, 0.196078, 1 )
+text = "An Endless Runner"
+
+[node name="SubtitleLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -222.5
+margin_top = -35.5
+margin_right = 222.5
+margin_bottom = 15.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.290196, 0.211765, 0.196078, 1 )
+text = "A Godot demo by @ladybenko"
+
+[node name="InstructionsLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -163.5
+margin_top = -149.0
+margin_right = 163.5
+margin_bottom = -98.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.290196, 0.211765, 0.196078, 1 )
+text = "Press <SPACE> to start"
