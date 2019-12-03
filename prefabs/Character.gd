@@ -10,6 +10,7 @@ signal death_started
 var ground_y = 0
 var speed_y = 0
 var is_dying = false
+var is_jumping = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +19,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var can_jump = position.y >= ground_y and not is_dying
+	var can_jump = not is_jumping and not is_dying
 
 	if Input.is_action_just_pressed("chara_jump") and can_jump:
+		is_jumping = true
 		speed_y = -JUMP_SPEED
 		$AudioJumpSfx.play()
 
@@ -30,6 +32,20 @@ func _process(delta):
 	position.y += speed_y * delta
 	position.y = min(position.y, ground_y) # don't go beyond ground level
 
+	# update state and animations
+	var is_on_ground = position.y >= ground_y
+	if is_jumping and is_on_ground: # character just hit the ground
+		is_jumping = false
+		
+	if is_dying:
+		$AnimatedSprite.play("die")
+	elif is_jumping and speed_y <= 0: # jumping:  going up
+		$AnimatedSprite.play("jump")
+	elif is_jumping and speed_y > 0: # jumping: falling down
+		$AnimatedSprite.play("fall")
+	else:
+		$AnimatedSprite.play("walk")
+	
 func _on_Character_area_entered(area):
 	if area.is_in_group("obstacles") and not is_dying:
 		self._die()
@@ -38,7 +54,6 @@ func _die():
 	is_dying = true
 
 	$AudioHitSfx.play()
-	$AnimatedSprite.play("dead")
 
 	$DeathTween.interpolate_property(
 		$AnimatedSprite, "rotation", 0, PI/2,

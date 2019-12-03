@@ -18,7 +18,6 @@ SCROLL_SPEED = 120
 STAGE_SCENE = ExtResource( 2 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
 
 [node name="BackLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.15, 1 )
